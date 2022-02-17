@@ -2,6 +2,8 @@ import java.io.File
 
 fun main() {
     val inputFile = "hz_all_nodes.log"
+    val outputFile = "output.txt"
+    File(outputFile).writeText("") // Clear output from previous runs
     val log = File(inputFile).readLines()
     val threadStrings = mutableMapOf<String, Int>()
     log.forEach { str ->
@@ -11,6 +13,6 @@ fun main() {
     }
     val sortedThreads = threadStrings.toList().sortedByDescending { (_, count) -> count }
     for (i in 0..9) {
-        println("${sortedThreads[i].first} ${sortedThreads[i].second}")
+        File(outputFile).appendText("${sortedThreads[i].first} ${sortedThreads[i].second}\n")
     }
 }
