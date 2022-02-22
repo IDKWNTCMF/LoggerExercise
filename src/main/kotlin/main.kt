@@ -1,4 +1,5 @@
 import java.io.File
+import java.lang.Integer.min
 
 fun main(args : Array<String>) {
     val inputFile = if (args.isNotEmpty()) args[0] else "hz_all_nodes.log"
@@ -13,7 +14,7 @@ fun main(args : Array<String>) {
         threadStrings[threadName] = curValue + 1
     }
     val sortedThreads = threadStrings.toList().sortedByDescending { (_, count) -> count }
-    for (i in 0 until cnt) {
+    for (i in 0 until min(cnt, sortedThreads.size)) {
         File(outputFile).appendText("${sortedThreads[i].first} ${sortedThreads[i].second}\n")
     }
 }
